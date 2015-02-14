@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace Poker
 {
+    enum RANK
+    {
+        TWO, TREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, DAME, KING, AS
+    };
+
     public class Card : IComparable<Card>
     {
         public byte Suit { get; set; }

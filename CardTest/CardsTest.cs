@@ -11,7 +11,7 @@ namespace CardTest
         public void Test_String()
         {
             // arrange
-            byte rank = 0;
+            byte rank = 2;
             byte suit = 0;
             Card c2h = new Card { Rank=rank, Suit=suit };
 

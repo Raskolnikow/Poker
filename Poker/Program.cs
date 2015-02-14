@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using school.events;
+
 namespace Poker
 {
     static class Program
@@ -18,7 +20,7 @@ namespace Poker
             // Application.SetCompatibleTextRenderingDefault(false);
             // Application.Run(new Form1());
 
-            Deck deck = new Deck();
+            /*Deck deck = new Deck();
             HandAnalyzer analyzer = new HandAnalyzer();
 
             List<Card> handCards = new List<Card>();
@@ -50,7 +52,23 @@ namespace Poker
             catch (Exception e)
             {
                 Console.WriteLine(e);
-            }
+            }*/
+
+            var dealer = new CarDealer();
+
+            var michael = new Consumer("Michael");
+            dealer.NewCarInfo += michael.NewCarIsHere;
+
+            dealer.NewCar("Ferrari");
+
+            var sebastian = new Consumer("Sebastian");
+            dealer.NewCarInfo += sebastian.NewCarIsHere;
+
+            dealer.NewCar("Mercedes");
+
+            dealer.NewCarInfo -= michael.NewCarIsHere;
+
+            dealer.NewCar("Red Bull Racing");
         }
     }
 }

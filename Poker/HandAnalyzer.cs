@@ -32,6 +32,27 @@ namespace Poker
      *      
      *      + Straight
      *      + High Card
+     *      
+     * 
+     *      Ah Kh Dh Jh 10h 8d Ac
+     *      
+     *      Dd Jd 10d 9d 8d Ac Kh
+     *      
+     *      Kd Kh Ks Kc Jd 8c 2h
+     *      
+     *      Dh Dd Dc 10h 10d 8c Ad
+     *      
+     *      9h Jh 2h 8h Ah 10c Jd
+     *      
+     *      8c 9d 10c Jh Dh 2d 5c
+     *      
+     *      8c 8d 8h Ad Jc 10h 3d
+     *      
+     *      9c 9d 10c 10h Js As 8h
+     *      
+     *      9c 9d As Ks 8c 7d 2h
+     *      
+     *      Dc 9d As Ks 8c 7d 2h
      * 
      */
     class HandAnalyzer
@@ -87,150 +108,28 @@ namespace Poker
                 this.allCards.Add(c);
 
             //allCards.Sort();
-
-            countCards();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        private void countCards()
-        {
-            for(byte i=0; i<15; i++)
-                ranks[i] = 0;
-
-            for (byte i = 0; i < 4; i++)
-                suits[i] = 0;
-
-            foreach (Card c in allCards)
-            {
-                ranks[c.Rank]++;
-                suits[c.Suit]++;
-            }
-        }
+        
 
         /// <summary>
         /// Es ist zu überlegen, ob eine Sortierung alle weiteren Schritte vereinfachen würde.
         /// </summary>
         private void analyze()
         {
-            if (!RoyalFlush())
-                if (!StraightFlush())   
-                    if (!FourOfAKind())
-                        if (!FullHouse())
-                            if (!Flush())
-                                if (!Straight())
-                                    if (!Set())
-                                        if (!TwoPair())
-                                            if (!OnePair())
-                                                HighCard();
+            /*if (!Hand.isRoyalFlush())
+                if (!Hand.isStraightFlush())   
+                    if (!Hand.isFourOfAKind())
+                        if (!Hand.isFullHouse())
+                            if (!Hand.isFlush())
+                                if (!Hand.isStraight())
+                                    if (!Hand.isSet())
+                                        if (!Hand.isTwoPair())
+                                            if (!Hand.isOnePair())
+                                                Hand.isHighCard();*/
         }
 
-        /* ------------------------------------ Detections ------------------------------------------ */
-
-        bool isFlush()
-        {
-            foreach (byte s in suits)
-                if (s >= 4)
-                    return true;
-
-            return false;
-        }
-
-        byte isStraight()
-        {
-            return 0;
-        }
-
-        // Es müssen alle sieben Karten geprüft werden, auch wenn schon
-        // in der Flush() Routine die Farbe geprüft wurde. Der Royal/Straight
-        // kann zustande kommen bei mehr als 5 gleichen farben.
-        private bool RoyalFlush()
-        {
-            if (isFlush())
-            {
-                if (isStraight() == 14)
-                {
-                    handType = HAND.ROYAL_FLUSH;
-                    return true;
-                }
-            }
-
-            for (int i = 0; i < 5; i++)
-                hand.Add(allCards[i]);
-
-            return false;
-        }
-
-        // Es müssen alle sieben Karten geprüft werden, auch wenn schon
-        // in der Flush() Routine die Farbe geprüft wurde. Der Royal/Straight
-        // kann zustande kommen bei mehr als 5 gleichen farben.
-        private bool StraightFlush()
-        {
-            throw new NotImplementedException();
-        }
-
-        // mindestens fünf Karten müssen von der gleichen Farbe sein
-        // at least five cards have to be of same suit
-        private bool Flush()
-        {
-            throw new NotImplementedException();
-        }
         
-        //
-        //
-        //
-        private bool FourOfAKind()
-        {
-            throw new NotImplementedException();
-        }
-
-        //
-        //
-        //
-        private bool FullHouse()
-        {
-            throw new NotImplementedException();
-        }
-
-        //
-        //
-        //
-        private bool Straight()
-        {
-            throw new NotImplementedException();
-        }
-        //
-        //
-        //
-        private bool Set()
-        {
-            throw new NotImplementedException();
-        }
-
-        //
-        //
-        //
-        private bool TwoPair()
-        {
-            throw new NotImplementedException();
-        }
-
-        //
-        //
-        //
-        private bool OnePair()
-        {
-            throw new NotImplementedException();
-        }
-
-        //
-        //
-        //
-        private bool HighCard()
-        {
-            throw new NotImplementedException();
-        }
 
         /* ------------------------------------ private members ------------------------------------------ */
 
@@ -241,8 +140,5 @@ namespace Poker
         List<Card> allCards = new List<Card>();
         List<Card> hand = new List<Card>();
         HAND handType;
-
-        byte[] ranks = new byte[15];
-        byte[] suits = new byte[4];
     }
 }
