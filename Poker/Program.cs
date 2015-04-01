@@ -72,9 +72,10 @@ namespace Poker
 
 
             Game poker = new Game();
-            Controller controller = new Controller(poker);
             View view = new View();
-            poker.NewState += view.UpdateStateInfo;
+            Controller controller = new Controller(poker, view);
+            
+            //poker.NewState += controller.UpdateStateInfo;
 
             poker.addPlayer(new Player("sebastian", 1000));
             poker.addPlayer(new Player("bernd", 1000));
