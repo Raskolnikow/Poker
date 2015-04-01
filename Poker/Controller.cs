@@ -9,9 +9,12 @@ namespace Poker
 {
     class Controller
     {
-        public Controller(Game game)
+        public Controller(Game game, View view)
         {
             this.game = game;
+            this.view = view;
+
+            this.game.NewState += UpdateStateInfo;
         }
 
         public void run()
@@ -21,6 +24,11 @@ namespace Poker
             timer.Enabled = true;
         }
 
+        private void UpdateStateInfo(object sender, GameStateEventArgs e)
+        {
+            view.UpdateStateInfo(sender, e);
+        }
+
         private void OnTime(object sender, ElapsedEventArgs e)
         {
             game.goToNextState();
@@ -28,5 +36,6 @@ namespace Poker
 
         private Timer timer;
         private Game game;
+        private View view;
     }
 }
